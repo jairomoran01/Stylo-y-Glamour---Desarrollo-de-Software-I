@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class LoginController {
@@ -23,17 +24,19 @@ public class LoginController {
 
     // Procesar el formulario de inicio de sesión
     @PostMapping("/login")
+
     public String procesarLogin(@RequestParam("correo") String correo,
                                 @RequestParam("contraseña") String contraseña,
-                                Model model) {
+                                Model model,
+                                HttpSession session) {
         Cliente cliente = clienteRepository.findByCorreoAndContraseña(correo, contraseña);
-
+    
+    
         if (cliente != null) {
-            // Iniciar sesión exitosa, redirige al dashboard o a otra página
-            model.addAttribute("cliente", cliente);
+            // Guardar el cliente en la sesión
+            session.setAttribute("cliente", cliente);
             return "redirect:/dashboard";
         } else {
-            // Iniciar sesión fallida, mostrar mensaje de error
             model.addAttribute("error", "Correo o contraseña incorrectos");
             return "login";
         }
