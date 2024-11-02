@@ -22,6 +22,12 @@ public class LoginController {
         return "login";
     }
 
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate(); // Invalidate the session
+        return "redirect:/login?logout"; // Redirect to the login page with a logout message
+    }
+
     // Procesar el formulario de inicio de sesión
     @PostMapping("/login")
 
