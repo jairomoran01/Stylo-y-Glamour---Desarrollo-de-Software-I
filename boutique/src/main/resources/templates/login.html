@@ -4,29 +4,45 @@
     <meta charset="UTF-8">
     <title>Iniciar Sesión</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa; /* Color de fondo suave */
+        }
+        .login-container {
+            max-width: 400px; /* Ancho máximo del cuadro */
+            margin: auto; /* Centrar el cuadro */
+            padding: 20px; /* Espaciado interno */
+            border: 1px solid #ced4da; /* Borde del cuadro */
+            border-radius: 10px; /* Bordes redondeados */
+            background-color: white; /* Color de fondo del cuadro */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra del cuadro */
+        }
+    </style>
 </head>
 <body>
     <div class="container mt-5">
-        <h2>Iniciar Sesión</h2>
+        <div class="login-container">
+            <h2 class="text-center">Iniciar Sesión</h2>
 
-        <!-- Mensaje de error si las credenciales son incorrectas -->
-        <div th:if="${error}" class="alert alert-danger" role="alert" style="font-size: 1.2em; font-weight: bold;">
-            [[${error}]]
+            <!-- Mensaje de error si las credenciales son incorrectas -->
+            <div th:if="${error}" class="alert alert-danger" role="alert" style="font-size: 1.2em; font-weight: bold;">
+                [[${error}]]
+            </div>
+
+            <!-- Formulario de inicio de sesión -->
+            <form th:action="@{/login}" method="post">
+                <div class="mb-3">
+                    <label for="correo" class="form-label">Correo Electrónico</label>
+                    <input type="email" class="form-control" id="correo" name="correo" required>
+                </div>
+                <div class="mb-3">
+                    <label for="contraseña" class="form-label">Contraseña</label>
+                    <input type="password" class="form-control" id="contraseña" name="contraseña" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Iniciar Sesión</button>
+                <a href="/registro" class="btn btn-secondary w-100 mt-2">Registrarse</a>
+            </form>
         </div>
-
-        <!-- Formulario de inicio de sesión -->
-        <form th:action="@{/login}" method="post">
-            <div class="mb-3">
-                <label for="correo" class="form-label">Correo Electrónico</label>
-                <input type="email" class="form-control" id="correo" name="correo" required>
-            </div>
-            <div class="mb-3">
-                <label for="contraseña" class="form-label">Contraseña</label>
-                <input type="password" class="form-control" id="contraseña" name="contraseña" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
-            <a href="/registro" class="btn btn-secondary mt-2">Registrarse</a>
-        </form>
     </div>
 </body>
 </html>
