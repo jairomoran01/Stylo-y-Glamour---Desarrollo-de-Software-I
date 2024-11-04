@@ -26,6 +26,6 @@ public class ProductoController {
     @PostMapping("/guardar")
     public String guardarProducto(@ModelAttribute Producto producto) {
         productoService.guardarProducto(producto);
-        return "redirect:/admin/dashboard";
+        return "redirect:/admin";
     }
 }
