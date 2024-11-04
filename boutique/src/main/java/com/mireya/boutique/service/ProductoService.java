@@ -20,4 +20,8 @@ public class ProductoService {
     public List<Producto> searchProductos(String nombre) {
         return productoRepository.findByNombreContaining(nombre);
     }
+
+    public void guardarProducto(Producto producto) {
+        productoRepository.save(producto);
+    }
 }

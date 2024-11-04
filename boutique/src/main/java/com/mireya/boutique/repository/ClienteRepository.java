@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 public interface ClienteRepository extends JpaRepository<Cliente, Long> {
     // Puedes agregar consultas personalizadas aquí si es necesario
     Cliente findByCorreoAndContraseña(String correo, String contraseña);
+    Cliente findByCorreo(String correo);
 }

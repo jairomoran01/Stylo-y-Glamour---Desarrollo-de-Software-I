@@ -39,12 +39,18 @@ public class LoginController {
     
     
         if (cliente != null) {
-            // Guardar el cliente en la sesión
-            session.setAttribute("cliente", cliente);
-            return "redirect:/dashboard";
+            // Verifica la contraseña
+            if (contraseña.equals(cliente.getContraseña())) {
+                // Guardar el cliente en la sesión
+                session.setAttribute("cliente", cliente);
+                return "redirect:/dashboard";
+            } else {
+                model.addAttribute("error", "Correo o contraseña incorrectos");
+            }
         } else {
-            model.addAttribute("error", "Correo o contraseña incorrectos");
-            return "login";
+            model.addAttribute("error", "No existe una cuenta con este correo");
         }
+    
+        return "login";
     }
 }
