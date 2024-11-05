@@ -17,8 +17,8 @@ public class LoginController {
     private ClienteRepository clienteRepository;
 
     // Mostrar el formulario de inicio de sesión
-    @GetMapping({"/", "/login"})
-    public String mostrarFormularioLogin() {
+    @GetMapping("/login")
+    public String mostrarFormularioLoginCliente() {
         return "login";
     }
 

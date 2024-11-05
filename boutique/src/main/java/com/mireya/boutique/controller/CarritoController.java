@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import java.util.List;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -76,5 +77,49 @@ public class CarritoController {
         }
         return "ver-carrito"; // Vista del carrito
 
+    }
+
+    @PostMapping("/actualizar-carrito")
+    public String actualizarCarrito(@RequestParam("productoId") Long productoId, 
+                                    @RequestParam("cantidad") Integer cantidad,
+                                    HttpSession session) {
+
+        Cliente cliente = (Cliente) session.getAttribute("cliente");
+        if (cliente == null) {
+            return "redirect:/login"; 
+        }
+
+        Optional<Carrito> carritoOptional = carritoRepository.findByCliente(cliente);
+        if (carritoOptional.isPresent()) {
+            Carrito carrito = carritoOptional.get();
+            List<Producto> productos = carrito.getProductos();
+
+
+            for (int i = 0; i < productos.size(); i++) {
+                Producto producto = productos.get(i);
+                if (producto.getId().equals(productoId)) {
+
+                    if(cantidad == 0){ // Eliminar producto si la cantidad es 0
+                         carrito.setTotal(carrito.getTotal()- producto.getPrecio());
+                         productos.remove(i);
+                        break;
+
+                    }
+                    double precioAnterior = producto.getPrecio();
+                    carrito.setTotal(carrito.getTotal()- precioAnterior);
+                    producto.setPrecio(producto.getPrecio() * cantidad);
+                    carrito.setTotal(carrito.getTotal() + producto.getPrecio());
+                    break;
+
+
+                }
+
+
+            }
+
+            carritoRepository.save(carrito);
+        }
+
+        return "redirect:/ver-carrito";
     }
 }

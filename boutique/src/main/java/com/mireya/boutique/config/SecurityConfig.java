@@ -20,13 +20,13 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests(authorize -> authorize
-                .requestMatchers("/admin/**").hasRole("ADMIN")
-                .requestMatchers("/dashboard", "/productos").authenticated()
-                .anyRequest().permitAll()
+                .requestMatchers("/admin/**").hasRole("ADMIN")  // Secure admin area
+                .requestMatchers("/dashboard", "/productos").permitAll() // These require authentication, but not necessarily admin
+                .anyRequest().permitAll() // All other requests are permitted
             )
             .formLogin(form -> form
-                .loginPage("/admin/login")
-                .loginProcessingUrl("/admin/login")
+                .loginPage("/admin/login") // Specifically set admin login page
+                .loginProcessingUrl("/admin/login") // Admin login processing URL
                 .defaultSuccessUrl("/admin", true)
                 .permitAll()
             )
