@@ -18,7 +18,8 @@ public class LoginController {
 
     // Mostrar el formulario de inicio de sesión
     @GetMapping("/login")
-    public String mostrarFormularioLoginCliente() {
+    public String mostrarFormularioLoginCliente(Model model) {
+        model.addAttribute("error", null); // Clear any previous error message
         return "login";
     }
 
@@ -30,27 +31,26 @@ public class LoginController {
 
     // Procesar el formulario de inicio de sesión
     @PostMapping("/login")
-
     public String procesarLogin(@RequestParam("correo") String correo,
                                 @RequestParam("contraseña") String contraseña,
                                 Model model,
                                 HttpSession session) {
-        Cliente cliente = clienteRepository.findByCorreoAndContraseña(correo, contraseña);
-    
-    
-        if (cliente != null) {
-            // Verifica la contraseña
-            if (contraseña.equals(cliente.getContraseña())) {
-                // Guardar el cliente en la sesión
+
+        model.addAttribute("error", null); // Clear any previous error message
+
+        Cliente cliente = clienteRepository.findByCorreo(correo); // Find by email only first
+
+        if (cliente == null) {
+            model.addAttribute("error", "No existe una cuenta con este correo");
+        } else {
+            if (cliente.getContraseña().equals(contraseña)) {
                 session.setAttribute("cliente", cliente);
                 return "redirect:/dashboard";
             } else {
                 model.addAttribute("error", "Correo o contraseña incorrectos");
             }
-        } else {
-            model.addAttribute("error", "No existe una cuenta con este correo");
         }
-    
+
         return "login";
     }
 }
