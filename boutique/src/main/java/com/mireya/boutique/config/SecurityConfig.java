@@ -22,6 +22,7 @@ public class SecurityConfig {
             .authorizeHttpRequests(authorize -> authorize
                 .requestMatchers("/admin/**").hasRole("ADMIN")  // Secure admin area
                 .requestMatchers("/dashboard", "/productos").permitAll() // These require authentication, but not necessarily admin
+                .requestMatchers("/h2-console/**").permitAll() // Permit H2 console
                 .anyRequest().permitAll() // All other requests are permitted
             )
             .formLogin(form -> form
@@ -34,6 +35,10 @@ public class SecurityConfig {
                 .logoutUrl("/admin/logout")
                 .logoutSuccessUrl("/admin/login?logout")
                 .permitAll());
+        
+        http.csrf().disable();    //VERY IMPORTANT FOR H2-CONSOLE.
+        http.headers().frameOptions().disable(); // Required for H2-console to work within a frame
+
 
         return http.build();
     }

@@ -1,131 +1,111 @@
 /* General Styles */
 body {
-    font-family: 'Arial', sans-serif; /* Modern font stack */
+    font-family: 'Playfair Display', serif; /* Elegant serif font for headings */  
+    font-size: 16px;
     line-height: 1.6;
-    background-color: #f4f4f4; /* Light gray background */
-    color: #333; /* Dark gray text */
-    margin: 0; /* Reset default margins */
+    background-color: #f8f9fa; /* Soft off-white background */
+    color: #333;
+    margin: 0;
 }
 
-.container {
-    max-width: 960px; /* Limit container width for large screens */
-    margin: 0 auto;
-    padding: 20px;
+/* Use a sans-serif font for body text */
+p, ul, li, label, input, textarea, .btn {
+    font-family: 'Arial', sans-serif;
 }
+
 
 h1, h2, h3 {
-    font-weight: 600; /* Slightly bolder headings */
-    color: #222; /* Darker heading color */
+    font-family: 'Playfair Display', serif; /* Elegant font for headers */
+    font-weight: 600;
+    color: #222;
 }
 
+
 a {
-    color: #007bff; /* Standard Bootstrap blue for links */
-    text-decoration: none; /* Remove underlines from links */
-    transition: color 0.3s ease; /* Smooth color transition on hover */
+    color: #c8102e; /* A deeper, richer red */
+    text-decoration: none;
+    transition: color 0.3s ease;
 }
 
 a:hover {
-    color: #0056b3; /* Darker blue on hover */
+    color: #960018; /* Darker red on hover */
 }
 
+/* Buttons - Soft, rounded style */
 .btn {
-    border-radius: 5px; /* Slightly rounded buttons */
+    border-radius: 20px; /* More pronounced rounded corners */
+    padding: 10px 20px;  /* Increased padding */
+    font-weight: 500;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-primary { /* Example, customize as needed */
+    background-color: #c8102e;
+    border-color: #c8102e;
+    color: #fff;
+
 }
 
 
-/* Form Styles (login, registration, product forms) */
-.form-container {  /* Renamed for broader use */
+.btn-primary:hover {
+    background-color: #960018;
+    border-color: #960018;
+    transform: scale(1.02);
+}
+
+
+/* Form Styles */
+.form-container {
     background-color: #fff;
     border-radius: 8px;
-    padding: 30px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px; /* Add some bottom margin */
+    padding: 40px;  /* Increased padding */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Softer shadow */
+    margin-bottom: 30px;
 }
 
-.form-label {
-    font-weight: 500;
-}
-
-.form-control {
-    border-radius: 5px;
-}
-
-.alert {
-    border-radius: 5px;
-}
+/* ... (rest of the form styles - labels, controls, alerts remain similar) ... */
 
 
-/* Table Styles (admin product modification) */
+
+/* Table Styles (admin) - Clean and simple */
+
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 20px;
+    border: 1px solid #ddd; /* Light border around table */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+
 }
 
 th, td {
-    padding: 12px 15px;
+    padding: 15px;
     text-align: left;
-    border-bottom: 1px solid #ddd;
-}
-
-th {
-    background-color: #f5f5f5; /* Light gray table header */
-    font-weight: 500;
+    border: 1px solid #ddd; /* Light border between cells */
 }
 
 
+/* ... (rest of the styles, media queries, etc.) ... */
 
-/* Responsive Design Tweaks */
-@media (max-width: 768px) { /* Adjust breakpoint as needed */
-    .container {
-        padding: 10px;
-    }
-    .form-container {
-        padding: 20px;
-    }
-
-}
-
-/* Cart styles */
-.carrito-container {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.carousel-inner {
+    border-radius: 10px; /* Rounded corners for carousel */
+    overflow: hidden;  /* Ensures images fit nicely */
 }
 
 
-.carrito-container h2 {
-    margin-bottom: 20px;
+.card {
+    border: none; /* Remove default card border */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+    transition: transform 0.3s ease; /* Add a hover transition */
 }
 
 
-.carrito-container table {
-    width: 100%;
-    border-collapse: collapse;
-    border: none; /* Remove default table border */
-
+.card:hover {
+    transform: translateY(-5px); /* Lift card slightly on hover */
 }
 
-.carrito-container th, .carrito-container td {
-    padding: 10px;
-    text-align: left;
-    border-bottom: 1px solid #ddd; /* Add bottom border to rows */
+.card-img-top {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px; /* Rounded top corners for images */
 
-}
-
-.carrito-container th {
-    background-color: #f0f0f0;
-    border: none; /* Remove default table border */
-    font-weight: 600;
-
-}
-
-.carrito-container .total {
-    font-weight: bold;
-    margin-top: 20px;
-    text-align: right;
-    font-size: 1.2em; /* Make the total more prominent */
 }
